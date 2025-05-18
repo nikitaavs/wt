@@ -1,0 +1,27 @@
+CREATE DATABASE electricity;
+
+USE electricity;
+
+-- Consumer Table
+CREATE TABLE consumer (
+  consumer_id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100),
+  address VARCHAR(255)
+);
+
+-- Billing Table
+CREATE TABLE billing (
+  bill_id INT AUTO_INCREMENT PRIMARY KEY,
+  consumer_id INT,
+  units INT,
+  amount DECIMAL(10,2),
+  FOREIGN KEY (consumer_id) REFERENCES consumer(consumer_id)
+);
+
+
+post method 
+http://localhost:8888/6_electricity/index4.php
+body-
+name: nikita
+address: bibwewadi
+units:275

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tree Search and Sort</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container mt-4">
+    <h2 class="text-center">Binary Search Tree - Search & Sort</h2>
+
+    <!-- Insert section -->
+    <div class="my-4">
+      <input type="number" id="insertValue" class="form-control mb-2" placeholder="Enter a number to insert" />
+      <button onclick="insertValue()" class="btn btn-primary w-100">Insert</button>
+    </div>
+
+    <!-- Search section -->
+    <div class="my-4">
+      <input type="number" id="searchValue" class="form-control mb-2" placeholder="Enter a number to search" />
+      <button onclick="searchValue()" class="btn btn-warning w-100">Search</button>
+      <p id="searchResult" class="text-center mt-2"></p>
+    </div>
+
+    <!-- Sort section -->
+    <div class="text-center">
+      <button onclick="sortTree()" class="btn btn-success mb-2">Sort (In-order Traversal)</button>
+      <p id="sortedResult" class="text-success fw-bold"></p>
+    </div>
+  </div>
+
+  <script>
+    // Node structure for BST
+    class Node {
+      constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+      }
+    }
+
+    // Root of the BST
+    let root = null;
+
+    // Insert value into BST
+    function insert(node, data) {
+      if (node === null) return new Node(data);
+      if (data < node.data) node.left = insert(node.left, data);
+      else node.right = insert(node.right, data);
+      return node;
+    }
+
+    function insertValue() {
+      const val = parseInt(document.getElementById("insertValue").value);
+      if (!isNaN(val)) {
+        root = insert(root, val);
+        alert("Inserted: " + val);
+        document.getElementById("insertValue").value = "";
+      }
+    }
+
+    // Search in BST
+    function search(node, value) {
+      if (node === null) return false;
+      if (node.data === value) return true;
+      return value < node.data ? search(node.left, value) : search(node.right, value);
+    }
+
+    function searchValue() {
+      const val = parseInt(document.getElementById("searchValue").value);
+      const found = search(root, val);
+      document.getElementById("searchResult").innerText = found ? "✅ Number Found" : "❌ Number Not Found";
+      document.getElementById("searchValue").value = "";
+    }
+
+    // In-order traversal (Sorted order)
+    function inorder(node, result) {
+      if (node) {
+        inorder(node.left, result);
+        result.push(node.data);
+        inorder(node.right, result);
+      }
+    }
+
+    function sortTree() {
+      const result = [];
+      inorder(root, result);
+      document.getElementById("sortedResult").innerText = result.join(", ");
+    }
+  </script>
+</body>
+</html>
