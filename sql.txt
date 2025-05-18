@@ -1,0 +1,24 @@
+CREATE DATABASE grocery_db;
+USE grocery_db;
+
+CREATE TABLE consumer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    price DECIMAL(10,2),
+    quantity INT,
+    image_url VARCHAR(255)
+);
+
+-- Sample Data
+INSERT INTO items (name, price, quantity, image_url) VALUES
+('Rice', 45.00, 50, 'https://via.placeholder.com/100'),
+('Milk', 30.00, 20, 'https://via.placeholder.com/100'),
+('Eggs', 60.00, 100, 'https://via.placeholder.com/100');
