@@ -1,0 +1,35 @@
+-- File: vit_results.sql
+
+-- Create database
+CREATE DATABASE IF NOT EXISTS vit_results;
+USE vit_results;
+
+-- Table: Students
+CREATE TABLE students (
+    student_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    roll_no VARCHAR(20) UNIQUE NOT NULL,
+    branch VARCHAR(50) NOT NULL
+);
+
+-- Table: MSE (Mid-Semester Exam Marks - 30%)
+CREATE TABLE mse (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    subject1 INT CHECK (subject1 BETWEEN 0 AND 30),
+    subject2 INT CHECK (subject2 BETWEEN 0 AND 30),
+    subject3 INT CHECK (subject3 BETWEEN 0 AND 30),
+    subject4 INT CHECK (subject4 BETWEEN 0 AND 30),
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
+);
+
+-- Table: ESE (End-Semester Exam Marks - 70%)
+CREATE TABLE ese (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    subject1 INT CHECK (subject1 BETWEEN 0 AND 70),
+    subject2 INT CHECK (subject2 BETWEEN 0 AND 70),
+    subject3 INT CHECK (subject3 BETWEEN 0 AND 70),
+    subject4 INT CHECK (subject4 BETWEEN 0 AND 70),
+    FOREIGN KEY (student_id) REFERENCES students(student_id) ON DELETE CASCADE
+);
