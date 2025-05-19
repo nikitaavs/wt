@@ -1,0 +1,10 @@
+backend:(node.js + express + mysql)
+mkdir backend
+cd backend
+npm init -y
+npm install express cors mysql2 body-parser
+
+frontend:(react)
+npx create-react-app@latest frontend
+cd frontend
+npm install axios
