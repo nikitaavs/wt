@@ -3,8 +3,10 @@ mkdir backend
 cd backend
 npm init -y
 npm install express cors mysql2 body-parser
+node server.js
 
 frontend:(react)
 npx create-react-app@latest frontend
 cd frontend
 npm install axios
+npm start
